@@ -1,14 +1,26 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
   <head>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var system = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var theme = saved === "dark" || saved === "light" ? saved : system ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.classList.toggle("dark", theme === "dark");
+        } catch (error) {}
+      })();
+    </script>
+    <style>html[data-theme=dark],html[data-theme=dark] body,html[data-theme=dark] #root{color:#e2e8f0;background-color:#020617}html[data-theme=dark] [class~=bg-white],html[data-theme=dark] .rdt_Table,html[data-theme=dark] .rdt_TableHeadRow,html[data-theme=dark] .rdt_TableRow,html[data-theme=dark] .rdt_Pagination{color:#e2e8f0;background-color:#1e293b!important}</style>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/wagt-live/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wagt</title>
-    <script type="module" crossorigin src="/wagt-live/assets/index-C8KXHw-H.js"></script>
-    <link rel="stylesheet" crossorigin href="/wagt-live/assets/index-DOLe7q7m.css">
+    <script type="module" crossorigin src="/assets/index-64wLaO7A.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BgeUSUo_.css">
   </head>
-  <body>
+  <body class="bg-slate-100 dark:bg-slate-950">
     <div id="root"></div>
   </body>
 </html>
