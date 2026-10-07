@@ -1,24 +1,27 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
   <head>
-    <script>
-      (function () {
-        try {
-          var saved = localStorage.getItem("theme");
-          var system = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          var theme = saved === "dark" || saved === "light" ? saved : system ? "dark" : "light";
-          document.documentElement.setAttribute("data-theme", theme);
-          document.documentElement.classList.toggle("dark", theme === "dark");
-        } catch (error) {}
-      })();
-    </script>
-    <style>html[data-theme=dark],html[data-theme=dark] body,html[data-theme=dark] #root{color:#e2e8f0;background-color:#020617}html[data-theme=dark] [class~=bg-white],html[data-theme=dark] .rdt_Table,html[data-theme=dark] .rdt_TableHeadRow,html[data-theme=dark] .rdt_TableRow,html[data-theme=dark] .rdt_Pagination{color:#e2e8f0;background-color:#1e293b!important}</style>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/wagt-live/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wagt</title>
-    <script type="module" crossorigin src="/wagt-live/assets/index-DnqoPi0i.js"></script>
-    <link rel="stylesheet" crossorigin href="/wagt-live/assets/index-BgeUSUo_.css">
+
+    <!-- مضاف: بيطبّق الدارك قبل ما الصفحة تترسم (يمنع الوميض الأبيض) -->
+    <script>
+      try {
+        var t = localStorage.getItem('theme') ||
+          (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        // مضاف: شرط إن المسار يكون داشبورد (الصفحة الرئيسية ما تتأثرش)
+        if (t === 'dark' && location.pathname.startsWith('/dashboard')) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    </script>
+
+    <!-- مضاف: خلفية فورية للداشبورد الغامق لحد ما الـ CSS يتحمّل -->
+    <style>html.dark,html.dark body{background:#020617}</style>
+    <script type="module" crossorigin src="/wagt-live/assets/index-CQAiHx_S.js"></script>
+    <link rel="stylesheet" crossorigin href="/wagt-live/assets/index-B9AXAReZ.css">
   </head>
   <body class="bg-slate-100 dark:bg-slate-950">
     <div id="root"></div>
